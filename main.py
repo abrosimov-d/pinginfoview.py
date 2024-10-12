@@ -1,15 +1,16 @@
 from app.app import Application
-import os, signal
+import os, signal, traceback
 
-def signal_handler(signum, frame):
-    print('os._exit()')
-    os._exit(0)
+
 
 def main():
-    signal.signal(signal.SIGINT, signal_handler)
     app = Application()
-    app.run()
-
+    signal.signal(signal.SIGINT, app.signal_handler)
+    try:
+        app.run()
+    except Exception as e:
+        app.artist.exit = True
+        traceback.print_exc()
 
 if __name__ == '__main__':
     main()
