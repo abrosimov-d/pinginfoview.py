@@ -1,11 +1,14 @@
 from app.artist import Artist
 import os, signal, traceback, time
+import objgraph
 
 artist = Artist()
 
 def signal_handler(signum, frame):
     print('os._exit()')
     artist.exit = True
+    objgraph.show_most_common_types()
+    objgraph.show_growth()
     os._exit(0)
 
 def main():

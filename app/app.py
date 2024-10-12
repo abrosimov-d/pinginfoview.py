@@ -23,14 +23,18 @@ class Application():
         pass
 
     def run(self):
-        #self.artist.run()
-        for _ in range(999):
+        self.artist.run()
+        for _ in range(9999999):
             self.workloop()
-            sleep(3)
+            sleep(5)
         pass
 
     def ping(self, host):
-        result = int(ping(host, unit='ms'))
+        result = -1
+        try:
+            result = int(ping(host, unit='ms'))
+        except:
+            pass
         return result
 
     def signal_handler(self, signum, frame):
