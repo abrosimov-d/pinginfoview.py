@@ -6,7 +6,7 @@ export default class App{
         this.appElement = null
         
         this.hosts = []
-        this.header = new Header('pinginfoview.py')
+        this.header = new Header('🚀zabbix')
         hosts.forEach(host => {
             this.hosts.push(new Host(host));
         })
