@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir ping3 seaborn
 WORKDIR /app
 
 # Скопируем ваш скрипт в контейнер
-COPY your_script.py .
 
 # Укажем команду для запуска скрипта при старте контейнера
-CMD ["python", "your_script.py"]
+#CMD ["python", "main.py"]
+CMD ["python3", "-m http.server 8080"]
