@@ -6,7 +6,7 @@ class Database():
         pass
 
     def push(self, data):
-        print(f'db.push() {data}')
+        #print(f'db.push() {data}')
         filename = f'.{os.path.sep}database{os.path.sep}{data['host']}'
         line = f'{data['timestamp']};{data['delay']}'
         self.append_string_to_file(filename, line)

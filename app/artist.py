@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('Agg')
 import base64
-import gc
+import gc, warnings
 
 
 class Artist():
@@ -14,12 +14,13 @@ class Artist():
         pass
 
     def workloop(self):
+        warnings.simplefilter("ignore", UserWarning)
         hosts = os.listdir(self.directory)
-        print({os.path.sep})
+        #print({os.path.sep})
         for host in hosts:
             fig, axs = plt.subplots(1, 1, figsize=(12, 3))
             filename = f'{self.directory}{os.path.sep}{host}'
-            print('filename', filename)
+            #print('filename', filename)
             lines = self.read_all_lines(filename)
             timestamps = []
             delays = []

@@ -2,23 +2,25 @@ from datetime import datetime
 from app.config import Config
 from app.artist import Artist
 from app.database import Database
-from ping3 import ping
+from app.host import Host
 from time import sleep
 import os
 
 class Application():
     def __init__(self):
         self.config = Config('config.json')
+        self.hosts = [Host(ip) for ip in self.config.hosts]
         self.artist = Artist()
         self.database = Database()
         pass
 
     def workloop(self):
-        for host in self.config.hosts:
-            delay = self.ping(host)
+        for host in self.hosts:
+            delay = host.ping()
+            host.metric.process(delay)
             timestamp = int(datetime.now().timestamp())
             #print(f'{timestamp}: ping {host} = {delay}')
-            data = {'host': host, 'timestamp': timestamp, 'delay': delay}
+            data = {'host': host.ip, 'timestamp': timestamp, 'delay': delay}
             self.database.push(data)
         pass
 
@@ -28,14 +30,6 @@ class Application():
             self.workloop()
             sleep(5)
         pass
-
-    def ping(self, host):
-        result = -1
-        try:
-            result = int(ping(host, unit='ms'))
-        except:
-            pass
-        return result
 
     def signal_handler(self, signum, frame):
         print('os._exit()')
