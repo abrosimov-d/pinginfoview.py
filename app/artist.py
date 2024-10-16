@@ -38,7 +38,7 @@ class Artist():
             legend = f'host:{host}\ntime:{str(datetime.datetime.now()).split('.')[0]}\nmin:{min_delay} max:{max_delay} avg:{average}'
 
             sns.lineplot(x = timestamps, y = delays)
-            savefilename = f'images{os.path.sep}{base64.b64encode(host.encode('utf-8')).decode()}.png'
+            savefilename = f'.{os.path.sep}ui{os.path.sep}images{os.path.sep}{base64.b64encode(host.encode('utf-8')).decode()}.png'
             plt.legend(title=legend, loc='upper left')
             plt.savefig(savefilename)
             plt.clf()

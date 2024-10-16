@@ -22,4 +22,10 @@
    source venv/bin/activate   # для Linux/MacOS
    venv\Scripts\activate.bat  # для Windows
    pip install -r requirements.txt
+
+   sudo docker build -t zabbix .
+   sudo docker run --rm -p 8000:8000 zabbix
+
     ```
+
+

@@ -3,7 +3,7 @@ import socketserver
 import threading
 
 PORT = 8000
-DIRECTORY = "."
+DIRECTORY = "ui"
 
 class MyHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
