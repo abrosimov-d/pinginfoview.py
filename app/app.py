@@ -4,6 +4,7 @@ from app.artist import Artist
 from app.database import Database
 from app.host import Host
 from app.webserver import Webserver
+from app.logger import Logger
 from time import sleep
 import os
 
@@ -14,12 +15,15 @@ class Application():
         self.artist = Artist()
         self.database = Database()
         self.webserver = Webserver()
+        self.logger = Logger(f'.{os.path.sep}ui{os.path.sep}log.txt')
         pass
 
     def workloop(self):
         for host in self.hosts:
             delay = host.ping()
-            host.metric.process(delay)
+            metric_result = host.metric.process(delay)
+            if metric_result != None:
+                self.logger.debug(metric_result)
             timestamp = int(datetime.now().timestamp())
             #print(f'{timestamp}: ping {host} = {delay}')
             data = {'host': host.ip, 'timestamp': timestamp, 'delay': delay}

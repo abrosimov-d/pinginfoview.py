@@ -6,6 +6,6 @@ COPY main.py .
 COPY app app
 COPY ui ui
 
-RUN mkdir -p images
+RUN mkdir -p ui/images
 
 CMD ["python", "main.py"]
